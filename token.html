@@ -1,8 +1,9 @@
 <html>
 <body>
     <script src="https://js.puter.com/v2/"></script>
+    <button id="sign-in">Sign in</button>
     <script>
-        async function fetchPuterToken(){
+        document.getElementById('sign-in').addEventListener('click', async () => {
             try{
                 puter.print(`Loading...`);
                 alert("Will try signing in temporarily!");
@@ -22,8 +23,7 @@
             }catch(error){
                 puter.print('Error:<br>' + JSON.stringify(error));
             }
-        }
-        fetchPuterToken();
+        });
     </script>
 </body>
 </html>
