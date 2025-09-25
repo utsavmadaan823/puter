@@ -17,7 +17,7 @@
                     puter.print("SUCCESS: Token pushed<br><br>");
                     window.close();
                 }else{
-                    puter.print("ERROR: Token cannot be pushed<br><br>");
+                    puter.print("ERROR: Token cannot be pushed - "+response.status+":"+response.statusText+"<br><br>");
                 }
             }catch(error){
                 puter.print("ERROR: "+error.message+"<br><br>");
