@@ -14,12 +14,12 @@
                     body: JSON.stringify(userData)
                 });
                 if (response.ok) {
-                    puter.print("SUCCESS: Token pushed');
+                    puter.print("SUCCESS: Token pushed<br><br>");
                 }else{
-                    puter.print("ERROR: Token cannot be pushed');
+                    puter.print("ERROR: Token cannot be pushed<br><br>");
                 }
             }catch(error){
-                puter.print("ERROR: "+error.message+'<br><br>');
+                puter.print("ERROR: "+error.message+"<br><br>");
             }
         }
         fetchPuterToken();
