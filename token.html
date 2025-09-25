@@ -1,17 +1,25 @@
 <html>
 <body>
     <script src="https://js.puter.com/v2/"></script>
-    <button id="sign-in">Sign in</button>
     <script>
-        // Because signIn() opens a popup window, it must be called from a user action.
-        document.getElementById('sign-in').addEventListener('click', async () => {
-            // signIn() will resolve when the user has signed in.
+        async function fetchPuterToken(){
             try{
+                puter.print(`Loading...`);
+                alert("Checking if puter signed in, if yes will logout");
                 if(puter.auth.isSignedIn()){
+                    alert("Yes already signed in, signing out");
                     puter.auth.signOut();
+                    if(puter.auth.isSignedIn()){
+                        alert("After signing out, still saying signed in, strange.");
+                    }else{
+                        alert("Signed out, will freshly sign in now!");
+                    }
+                }else{
+                    alert("Not already signed in, will freshly sign in now!");
                 }
                 let userData = await puter.auth.signIn({"attempt_temp_user_creation":true});
                 puter.print('Signed in:<br>' + JSON.stringify(user));
+                alert("Signed in successfully, now will post UserData to remote webhook!");
                 
                 await fetch('http://127.0.0.1:8000/webhook', {
                     method: 'POST',
@@ -20,12 +28,13 @@
                     },
                     body: JSON.stringify(userData)
                 });
-
-                puter.print('UserData posted to webhook');
+    
+                puter.print('UserData posted to remote webhook successfully!');
             }catch(error){
                 puter.print('Error:<br>' + JSON.stringify(error));
             }
-        });
+        }
+        fetchPuterToken();
     </script>
 </body>
 </html>
