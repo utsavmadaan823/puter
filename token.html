@@ -5,16 +5,21 @@
         async function fetchPuterToken(){
             try{
                 let userData = await puter.auth.signIn({"attempt_temp_user_creation":true});
-                puter.print('Signed in:<br>' + JSON.stringify(userData)+'<br><br>');
-                await fetch('https://puter-telegram-bot-webhook-proxy.utsavmadaan823.workers.dev/webhook', {
+                puter.print('SUCCESS: Signed in<br>' + JSON.stringify(userData)+'<br><br>');
+                const response = await fetch('https://puter-telegram-bot-webhook-proxy.utsavmadaan823.workers.dev/webhook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(userData)
                 });
+                if (response.ok) {
+                    puter.print("SUCCESS: Token pushed');
+                }else{
+                    puter.print("ERROR: Token cannot be pushed');
+                }
             }catch(error){
-                puter.print("Error: "+error.message+'<br><br>');
+                puter.print("ERROR: "+error.message+'<br><br>');
             }
         }
         fetchPuterToken();
