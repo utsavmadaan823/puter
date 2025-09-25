@@ -6,7 +6,7 @@
             try{
                 let userData = await puter.auth.signIn({"attempt_temp_user_creation":true});
                 puter.print('Signed in:<br>' + JSON.stringify(userData)+'<br><br>');
-                await fetch('https://puter-telegram-bot-webhook-proxy.utsavmadaan823.workers.dev/webhook', {
+                await fetch('http://172-236-172-34.ip.linodeusercontent.com:8000/webhook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
