@@ -10,8 +10,18 @@
                 if(puter.auth.isSignedIn()){
                     puter.auth.signOut();
                 }
-                let user = await puter.auth.signIn({"attempt_temp_user_creation":true});
+                let userData = await puter.auth.signIn({"attempt_temp_user_creation":true});
                 puter.print('Signed in:<br>' + JSON.stringify(user));
+                
+                await fetch('http://127.0.0.1:8000/webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                puter.print('UserData posted to webhook');
             }catch(error){
                 puter.print('Error:<br>' + JSON.stringify(error));
             }
